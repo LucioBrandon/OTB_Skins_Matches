@@ -13,6 +13,10 @@ Player_Stats <- data %>%
                   filter(!is.na(Winner)) %>%
                   group_by(Course,Winner) %>%
                   summarise(count = n(), Total_Winnings = sum(Amount))
+Player_Stats_Type <- data %>%
+  filter(!is.na(Winner)) %>%
+  group_by(Course,Winner, `Hole Type`) %>%
+  summarise(count = n(), Total_Winnings = sum(Amount))
 
 Match_Stat <- data %>%
                 filter(!is.na(Winner)) %>%
@@ -27,3 +31,9 @@ Match_Stat <- data %>%
 
 Earnings <- Player_Stats %>% group_by(Winner) %>%
         summarise(Money = sum(Total_Winnings))
+
+Match_Info$Tournament <- ifelse(is.na(Match_Info$Tournament), 'Special', Match_Info$Tournament )
+
+
+
+
